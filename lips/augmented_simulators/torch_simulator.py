@@ -8,6 +8,7 @@ import shutil
 import time
 import json
 import tempfile
+from tqdm import tqdm
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -119,6 +120,8 @@ class TorchSimulator(AugmentedSimulator):
         train_loader = self._model.process_dataset(train_dataset, training=True)
         if val_dataset is not None:
             val_loader = self._model.process_dataset(val_dataset, training=False)
+        else:
+            val_loader = None
 
         # build the model
         self.build_model()
@@ -168,7 +171,7 @@ class TorchSimulator(AugmentedSimulator):
         for metric in self.params["metrics"]:
             metric_dict[metric] = 0
 
-        for _, batch_ in enumerate(train_loader):
+        for _, batch_ in enumerate(tqdm(train_loader)):
             architecture_type=self.params["architecture_type"]
             if architecture_type == "Classical":
                 data, target = batch_

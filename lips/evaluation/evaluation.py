@@ -48,10 +48,10 @@ class Evaluation(object):
                  config_section: Union[str, None]=None,
                  log_path: Union[str, None]=None
                  ):
-        if config is None:
-            self.config = ConfigManager(section_name=config_section, path=config_path)
-        else:
-            self.config = config
+        # if config is None:
+        #     self.config = ConfigManager(section_name=config_section, path=config_path)
+        # else:
+        #     self.config = config
 
         self.observations = dict()
         self.predictions = dict()
